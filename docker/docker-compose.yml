@@ -1,0 +1,41 @@
+version: "3.7"
+services:
+  # The Application
+  app:
+    build:
+      context: ..
+      dockerfile: docker/app/Dockerfile
+    working_dir: /usr/src/app
+    command: "gunicorn --bind 0.0.0.0:8080 app.app:app --reload -t=120"
+    ports:
+      - 127.0.0.1:8081:8080
+    volumes:
+      - ../:/usr/src/app
+    env_file:
+      - .env
+
+    # PostgreSQL
+  postgres:
+    image: postgres:latest
+    volumes:
+      - ./postgres/db:/var/lib/postgresql/data
+    environment:
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_PASSWORD=postgres"
+    ports:
+      - "127.0.0.1:5432:5432"
+
+  # Redis
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/data:/var/lib/redis
+    environment:
+      - REDIS_REPLICATION_MODE=master
+      - ALLOW_EMPTY_PASSWORD=yes
+
+networks:
+  default:
+    name: mrb_covid_network
