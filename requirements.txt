@@ -1,1 +1,2 @@
 python-dotenv==0.13.0
+pydicom==1.4.2
