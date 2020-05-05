@@ -1,3 +1,4 @@
+.vscode
 .history
 docker/postgres/db
 docker/redis/data
