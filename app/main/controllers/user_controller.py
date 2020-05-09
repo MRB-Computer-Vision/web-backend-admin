@@ -1,3 +1,4 @@
+# pylint: disable=missing-module-docstring
 from flask import request
 from flask_restplus import Resource
 
@@ -10,6 +11,8 @@ _user = UserDto.user
 
 @api.route('/')
 class UserList(Resource):
+    """ UserList Controller with get and post methods
+    """
     @api.doc('list_of_registered_users')
     @api.marshal_list_with(_user, envelope='data')
     def get(self):
@@ -29,12 +32,15 @@ class UserList(Resource):
 @api.param('id', 'The User identifier')
 @api.response(404, 'User not found.')
 class User(Resource):
+    """ User Controller with get User by Id
+    """
     @api.doc('get a user')
     @api.marshal_with(_user)
-    def get(self, id):
+    def get(self, _id): # pylint: disable=redefined-builtin
         """get a user given its identifier"""
-        user = get_a_user(id)
+        user = get_a_user(_id)
         if not user:
             api.abort(404)
         else:
             return user
+            

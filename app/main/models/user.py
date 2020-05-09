@@ -1,7 +1,9 @@
-from uuid import uuid4
+# pylint: disable=no-member
+# pylint: disable=missing-module-docstring
 from datetime import datetime
-from .. import db, flask_bcrypt
+from uuid import uuid4
 from sqlalchemy.dialects.postgresql import UUID
+from .. import db, flask_bcrypt
 
 class User(db.Model):
     """ User Model for storing user related details """
@@ -17,14 +19,23 @@ class User(db.Model):
 
     @property
     def password_without_hash(self):
+        """ Method to create an temporary password withou hash
+        """
         raise AttributeError('password_without_hash: write-only field')
 
     @password_without_hash.setter
     def password_without_hash(self, password_without_hash):
+        """ Method to create the hash and set on password attribute
+        """
         self.password = flask_bcrypt.generate_password_hash(password_without_hash).decode('utf-8')
 
     def check_password(self, password_without_hash):
+        """ Method to check password if is correct
+        """
         return flask_bcrypt.check_password_hash(self.password, password_without_hash)
 
     def __repr__(self):
+        """ To string method
+        """
         return "<User '{}'>".format(self.email)
+        

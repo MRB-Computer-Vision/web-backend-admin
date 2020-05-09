@@ -1,6 +1,4 @@
-import uuid
-import datetime
-
+# pylint: disable=missing-module-docstring
 from app.main import db
 from app.main.models.user import User
 
@@ -39,13 +37,20 @@ def save_new_user(data):
 
 
 def get_all_users():
+    """ Return all users from database
+    """
     return User.query.all()
 
 
-def get_a_user(id):
-    return User.query.filter_by(id=id).first()
+def get_a_user(_id): # pylint: disable=redefined-builtin
+    """ Get User by ID
+    """
+    return User.query.filter_by(id=_id).first()
 
 
 def save_changes(data):
-    db.session.add(data)
-    db.session.commit()
+    """ Save changes on database
+    """
+    db.session.add(data) # pylint: disable=no-member
+    db.session.commit() # pylint: disable=no-member
+    
