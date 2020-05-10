@@ -1,1 +1,1 @@
-web: python manage.py run
+web: uwsgi --http :8000 --wsgi-file manage.py run --master --processes 4 --threads 2
