@@ -1,3 +1,4 @@
+import uuid
 from app.main.models.user import User
 from app.main.services.blacklist_service import save_token
 
@@ -62,16 +63,17 @@ class Auth:
         # get the auth token
         auth_token = new_request.headers.get('Authorization')
         if auth_token:
+            auth_token = auth_token.replace('Bearer ', '')
             resp = User.decode_auth_token(auth_token)
-            if not isinstance(resp, str):
+            if isinstance(resp, str):
                 user = User.query.filter_by(id=resp).first()
                 response_object = {
                     'success': True,
                     'data': {
                         'user_id': user.id,
                         'email': user.email,
-                        'admin': user.admin,
-                        'registered_on': str(user.registered_on)
+                        'is_admin': user.is_admin,
+                        'created_at': str(user.created_at)
                     }
                 }
                 return response_object, 200

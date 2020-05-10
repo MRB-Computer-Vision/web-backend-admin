@@ -1,6 +1,7 @@
 # pylint: disable=no-member
 # pylint: disable=missing-module-docstring
 # pylint: disable=broad-except
+import os
 from datetime import datetime, timedelta
 from uuid import uuid4
 import jwt
@@ -53,10 +54,11 @@ class User(db.Model):
         """
         try:
             payload = {
-                'exp': datetime.utcnow() + timedelta(days=1, seconds=5),
+                'exp': datetime.utcnow() + timedelta(seconds=int(os.getenv("TOKEN_LIFETIME", 1440))),
                 'iat': datetime.utcnow(),
                 'sub': str(user_id)
             }
+            print(payload)
             return jwt.encode(
                 payload,
                 key,

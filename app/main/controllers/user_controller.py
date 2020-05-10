@@ -11,6 +11,7 @@ _user = UserDto.user
 
 
 @api.route('/')
+@api.doc(params={'Authorization': {'in': 'header', 'description': 'An authorization token'}})
 class UserList(Resource):
     """ UserList Controller with get and post methods
     """
