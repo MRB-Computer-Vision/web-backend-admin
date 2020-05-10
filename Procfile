@@ -1,1 +1,1 @@
-web: uwsgi --http :8000 --wsgi-file manage.py run --master --processes 4 --threads 2
+web: gunicorn --bind :8000 --workers 3 --threads 2 manage:app
