@@ -8,7 +8,18 @@ from app.main import create_app, db
 from app.main.models import user
 from app.main.models import blacklist
 
-app = create_app(os.getenv('BOILERPLATE_ENV') or 'dev')
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+try:
+    from flask.cli import load_dotenv
+    from pathlib import Path
+
+    env_path = Path('.') / 'docker/.env'
+    load_dotenv(env_path)
+except Exception as ex:  # pylint: disable=broad-except
+    pass
+
+app = create_app(os.getenv('APP_ENV') or 'dev')
 app.register_blueprint(blueprint)
 app.app_context().push()
 
