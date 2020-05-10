@@ -6,9 +6,9 @@ services:
       context: ..
       dockerfile: docker/app/Dockerfile
     working_dir: /usr/src/app
-    command: "gunicorn --bind 0.0.0.0:8080 app.app:app --reload -t=120"
+    command: "python manage.py runserver --host 0.0.0.0"
     ports:
-      - 127.0.0.1:8080:8080
+      - "127.0.0.1:5000:5000"
     volumes:
       - ../:/usr/src/app
     env_file:
