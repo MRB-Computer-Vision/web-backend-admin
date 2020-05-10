@@ -23,14 +23,16 @@ def save_new_user(data):
             password_without_hash=data['password']
         )
         save_changes(new_user)
-        response_object = {
-            'status': 'success',
-            'message': 'Successfully registered.'
-        }
-        return response_object, 201
+
+        return generate_token(new_user)
+        # response_object = {
+        #     'success': True,
+        #     'message': 'Successfully registered.'
+        # }
+        # return response_object, 201
     else:
         response_object = {
-            'status': 'fail',
+            'success': False,
             'message': 'User already exists. Please Log in.',
         }
         return response_object, 409
@@ -42,7 +44,7 @@ def get_all_users():
     return User.query.all()
 
 
-def get_a_user(_id): # pylint: disable=redefined-builtin
+def get_a_user(_id):  # pylint: disable=redefined-builtin
     """ Get User by ID
     """
     return User.query.filter_by(id=_id).first()
@@ -51,6 +53,23 @@ def get_a_user(_id): # pylint: disable=redefined-builtin
 def save_changes(data):
     """ Save changes on database
     """
-    db.session.add(data) # pylint: disable=no-member
-    db.session.commit() # pylint: disable=no-member
-    
+    db.session.add(data)  # pylint: disable=no-member
+    db.session.commit()  # pylint: disable=no-member
+
+
+def generate_token(user):
+    try:
+        # generate the auth token
+        auth_token = user.encode_auth_token(user.id)
+        response_object = {
+            'success': True,
+            'message': 'Successfully registered.',
+            'Authorization': auth_token.decode()
+        }
+        return response_object, 201
+    except Exception as e:
+        response_object = {
+            'success': False,
+            'message': 'Some error occurred. Please try again.'
+        }
+        return response_object, 401

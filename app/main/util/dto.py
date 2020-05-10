@@ -10,4 +10,11 @@ class UserDto:
         'is_admin': fields.Boolean(required=False, description='user check if is admin'),
         'is_active': fields.Boolean(required=False, description='user check if is active'),
     })
-    
+
+
+class AuthDto:
+    api = Namespace('auth', description='authentication related operations')
+    user_auth = api.model('auth_details', {
+        'email': fields.String(required=True, description='The email address'),
+        'password': fields.String(required=True, description='The user password '),
+    })

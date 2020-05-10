@@ -2,13 +2,11 @@ import os
 import unittest
 
 from app import blueprint
-
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
-
 from app.main import create_app, db
-
 from app.main.models import user
+from app.main.models import blacklist
 
 app = create_app(os.getenv('BOILERPLATE_ENV') or 'dev')
 app.register_blueprint(blueprint)
@@ -20,9 +18,11 @@ migrate = Migrate(app, db)
 
 manager.add_command('db', MigrateCommand)
 
+
 @manager.command
 def run():
     app.run()
+
 
 @manager.command
 def test():
@@ -32,6 +32,7 @@ def test():
     if result.wasSuccessful():
         return 0
     return 1
+
 
 if __name__ == '__main__':
     manager.run()

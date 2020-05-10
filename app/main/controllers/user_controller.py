@@ -4,6 +4,7 @@ from flask_restplus import Resource
 
 from ..util.dto import UserDto
 from ..services.user_service import save_new_user, get_all_users, get_a_user
+from app.main.util.decorator import token_required
 
 api = UserDto.api
 _user = UserDto.user
@@ -15,6 +16,7 @@ class UserList(Resource):
     """
     @api.doc('list_of_registered_users')
     @api.marshal_list_with(_user, envelope='data')
+    @token_required
     def get(self):
         """List all registered users"""
         return get_all_users()
@@ -36,11 +38,10 @@ class User(Resource):
     """
     @api.doc('get a user')
     @api.marshal_with(_user)
-    def get(self, _id): # pylint: disable=redefined-builtin
+    def get(self, _id):  # pylint: disable=redefined-builtin
         """get a user given its identifier"""
         user = get_a_user(_id)
         if not user:
             api.abort(404)
         else:
             return user
-            
