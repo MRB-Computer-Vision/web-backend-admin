@@ -24,7 +24,7 @@ class DevelopmentConfig(Config):
     """ All configs to DevelopmentConfig
     """
     DEBUG = True
-    DB_URL = 'postgresql+psycopg2://{user}:{pw}@{host}:{post}/{db}'.format(
+    DB_URL = 'postgresql+psycopg2://{user}:{pw}@{host}:{port}/{db}'.format(
         user=os.getenv('DB_USERNAME'),
         pw=os.getenv('DB_PASSWORD'),
         host=os.getenv('DB_HOST'),
