@@ -1,11 +1,12 @@
 # pylint: disable=no-member
 # pylint: disable=missing-module-docstring
+# pylint: disable=broad-except
 from datetime import datetime, timedelta
-import jwt
 from uuid import uuid4
+import jwt
 from sqlalchemy.dialects.postgresql import UUID
-from .. import db, flask_bcrypt
 from app.main.models.blacklist import BlacklistToken
+from .. import db, flask_bcrypt
 from ..config import key
 
 
@@ -61,8 +62,8 @@ class User(db.Model):
                 key,
                 algorithm='HS256'
             )
-        except Exception as e:
-            return e
+        except Exception as _e:
+            return _e
 
     @staticmethod
     def decode_auth_token(auth_token):
