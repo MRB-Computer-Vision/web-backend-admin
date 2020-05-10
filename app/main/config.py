@@ -41,6 +41,14 @@ class ProductionConfig(Config):
     """
     DEBUG = False
 
+    DB_URL = 'postgresql+psycopg2://{user}:{pw}@{host}:{port}/{db}'.format(
+        user=os.getenv('DB_USERNAME'),
+        pw=os.getenv('DB_PASSWORD'),
+        host=os.getenv('DB_HOST'),
+        port=os.getenv('DB_PORT'),
+        db=os.getenv('DB_DATABASE'))
+    SQLALCHEMY_DATABASE_URI = DB_URL
+
 
 config_by_name = dict(
     dev=DevelopmentConfig,
