@@ -58,7 +58,6 @@ class User(db.Model):
                 'iat': datetime.utcnow(),
                 'sub': str(user_id)
             }
-            print(payload)
             return jwt.encode(
                 payload,
                 key,
@@ -80,7 +79,7 @@ class User(db.Model):
             if is_blacklisted_token:
                 return 'Token blacklisted. Please log in again.'
             else:
-                return payload['sub']
+                return str(payload['sub'])
         except jwt.ExpiredSignatureError:
             return 'Signature expired. Please log in again.'
         except jwt.InvalidTokenError:

@@ -26,6 +26,7 @@ class UserLogin(Resource):
 
 
 @api.route('/logout')
+@api.doc(params={'Authorization': {'in': 'header', 'description': 'An authorization token'}})
 class LogoutAPI(Resource):
     """
     Logout Resource

@@ -12,7 +12,7 @@ class TestUserModel(BaseTestCase):
         user = User(
             email='test@test.com',
             password='test',
-            registered_on=datetime.datetime.utcnow()
+            created_at=datetime.datetime.utcnow()
         )
         db.session.add(user)
         db.session.commit()
@@ -23,14 +23,14 @@ class TestUserModel(BaseTestCase):
         user = User(
             email='test@test.com',
             password='test',
-            registered_on=datetime.datetime.utcnow()
+            created_at=datetime.datetime.utcnow()
         )
         db.session.add(user)
         db.session.commit()
         auth_token = user.encode_auth_token(user.id)
         self.assertTrue(isinstance(auth_token, bytes))
         self.assertTrue(User.decode_auth_token(
-            auth_token.decode("utf-8")) == 1)
+            auth_token.decode("utf-8")))
 
 
 if __name__ == '__main__':

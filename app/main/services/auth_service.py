@@ -27,7 +27,6 @@ class Auth:
                 return response_object, 401
 
         except Exception as e:
-            print(e)
             response_object = {
                 'success': False,
                 'message': 'Try again'
@@ -42,7 +41,7 @@ class Auth:
             auth_token = ''
         if auth_token:
             resp = User.decode_auth_token(auth_token)
-            if not isinstance(resp, str):
+            if isinstance(resp, str):
                 # mark the token as blacklisted
                 return save_token(token=auth_token)
             else:

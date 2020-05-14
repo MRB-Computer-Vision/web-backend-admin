@@ -5,7 +5,7 @@ from app.tests.base import BaseTestCase
 
 def register_user(self):
     return self.client.post(
-        '/user/',
+        '/users/',
         data=json.dumps(dict(
             email='example@gmail.com',
             password='123456'
@@ -67,7 +67,9 @@ class TestAuthBlueprint(BaseTestCase):
                 )
             )
             data = json.loads(response.data.decode())
-            self.assertTrue(data['status'] == 'success')
+            print("#################")
+            print(data)
+            self.assertTrue(data['success'])
             self.assertEqual(response.status_code, 200)
 
 
