@@ -1,6 +1,8 @@
 # app/__init__.py
+""" Global Setup to the API
 
-from flask_restplus import Api
+"""
+from flask_restx import Api
 from flask import Blueprint
 
 from .main.controllers.user_controller import api as user_ns
@@ -13,7 +15,8 @@ blueprint = Blueprint('api', __name__)
 #         'type': 'apiKey',
 #         'in': 'header',
 #         'name': 'Authorization',
-#         'description': "Type in the *'Value'* input box below: **'Bearer &lt;JWT&gt;'**, where JWT is the token"
+#         'description': "Type in the *'Value'* input box below: **'Bearer &lt;JWT&gt;'**,
+#  where JWT is the token"
 #     }
 # }
 
