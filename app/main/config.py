@@ -22,7 +22,6 @@ class DevelopmentConfig(Config):
         port=os.getenv('DB_PORT'),
         db=os.getenv('DB_DATABASE'))
     SQLALCHEMY_DATABASE_URI = DB_URL
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class TestingConfig(Config):
