@@ -1,6 +1,6 @@
 # pylint: disable=missing-module-docstring
 from flask import request
-from flask_restplus import Resource
+from flask_restx import Resource
 
 from ..util.dto import UserDto
 from ..services.user_service import save_new_user, get_all_users, get_a_user
