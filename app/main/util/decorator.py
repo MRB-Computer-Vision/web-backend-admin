@@ -4,6 +4,9 @@ from app.main.services.auth_service import Auth
 
 
 def token_required(f):
+    """ Force require token
+
+    """
     @wraps(f)
     def decorated(*args, **kwargs):
         data, status = Auth.get_logged_in_user(request)
@@ -18,6 +21,9 @@ def token_required(f):
 
 
 def admin_token_required(f):
+    """ Force require admin token
+
+    """
     @wraps(f)
     def decorated(*args, **kwargs):
 
