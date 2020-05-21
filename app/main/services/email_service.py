@@ -1,3 +1,4 @@
+from app.main import mail
 
 def send_email(recipient, body):
   msg = mail.send(
