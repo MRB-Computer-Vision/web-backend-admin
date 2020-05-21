@@ -1,0 +1,20 @@
+branch-defaults:
+  default:
+    environment: mrb-env
+    group_suffix: null
+  feature/first-setup-docker-and-first-impressions:
+    environment: mrb-env
+global:
+  application_name: mrb-backend
+  branch: null
+  default_ec2_keyname: null
+  default_platform: Python 3.6
+  default_region: sa-east-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: eb-cli
+  repository: null
+  sc: null
+  workspace_type: Application
