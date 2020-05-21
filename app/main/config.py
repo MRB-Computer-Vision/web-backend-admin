@@ -22,6 +22,14 @@ class DevelopmentConfig(Config):
         port=os.getenv('DB_PORT'),
         db=os.getenv('DB_DATABASE'))
     SQLALCHEMY_DATABASE_URI = DB_URL
+    
+    MAIL_SERVER :os.getenv('MAIL_SERVER')
+    MAIL_PORT = os.getenv('MAIL_PORT')
+    MAIL_USERNAME = os.getenv('MAIL_USERNAME')
+    MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
+    MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER')
+    MAIL_USE_TLS = os.getenv('MAIL_USE_TLS')
+    MAIL_USE_SSL = os.getenv('MAIL_USE_SSL')
 
 
 class TestingConfig(Config):
