@@ -36,9 +36,8 @@ class ExamDto:
         'status': fields.String(required=True, description='status'),
         'created_at': fields.String(required=False, description='created_at'),
         'updated_at': fields.Boolean(required=False, description='updated_at'),
-        'files': fields.(required=False, description='user check if is active'),
-    }
-
-    child = api.inherit('Child', parent, {
+        'files': fields.String(required=False, description='user check if is active')
+    })
+    child = api.inherit('Child', exam, {
         'extra': fields.String
     })
