@@ -1,15 +1,15 @@
 # pylint: disable=missing-module-docstring
 from app.main import db
 from app.main.models.exam import Exam, ExamFile
+from app.main.repositories.exam_repository import ExamRepository
+import json
 
-
-def add_exam(exam_params):
+def add_exam(data):
     # pylint: disable=no-member
-    exam = Exam()
+
     try:
-        # insert the token
-        db.session.add(exam)
-        db.session.commit()
+        exam_repository = ExamRepository()
+        exam = exam_repository.save(data)
         response_object = {
             'success': True,
             'message': 'Exam added with successfully.'
@@ -21,7 +21,6 @@ def add_exam(exam_params):
             'message': e
         }
         return response_object, 200
-
 
 def get_all_exams():
     """ Return all exams from database

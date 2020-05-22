@@ -27,9 +27,7 @@ class ExamList(Resource):
     @api.expect(_exam, validate=True)
     def post(self):
         """Creates a new Exam"""
-        pdb.set_trace()
-        data = request.json
-        return add_exam(data=data)
+        return add_exam(data=request.json)
 
 
 @api.route('/<id>')
