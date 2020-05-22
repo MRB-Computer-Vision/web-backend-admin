@@ -7,6 +7,7 @@ from flask_script import Manager
 from app.main import create_app, db
 from app.main.models import user
 from app.main.models import blacklist
+from app.main.models import exam
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
