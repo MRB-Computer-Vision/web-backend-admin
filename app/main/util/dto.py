@@ -31,13 +31,20 @@ class ExamDto:
     """ ExamDTO Class
     """
     api = Namespace('exams', description='exams related operations')
+
+    exam_file = api.model('exam_files', {
+        'id': fields.Integer(required=False, description='exam file id'),
+        'file_path': fields.String(required=True, description='type')
+    })
+
     exam = api.model('exams', {
         'id': fields.String(required=False, description='exam id'),
-        'status': fields.String(required=True, description='status'),
+        'status': fields.String(required=False, description='status'),
+        'type': fields.String(required=True, description='type'),
         'created_at': fields.String(required=False, description='created_at'),
         'updated_at': fields.Boolean(required=False, description='updated_at'),
-        'files': fields.String(required=False, description='user check if is active')
+        'exam_files': fields.List(fields.Nested(exam_file), required=True)
     })
-    child = api.inherit('Child', exam, {
-        'extra': fields.String
-    })
+    # child = api.inherit('Child', exam, {
+    #     'extra': fields.String
+    # })
