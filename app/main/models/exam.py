@@ -26,6 +26,7 @@ class Exam(db.Model):
     type = db.Column(db.String(255), nullable=False)
     exam_files = relationship("ExamFile", back_populates="exam")
     status = db.Column(db.Enum(StatusEnum), nullable=False, default="pending")
+    result = db.Column(db.Float(), nullable=False, default=0)
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
     updated_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
 
