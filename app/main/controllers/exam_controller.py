@@ -17,7 +17,7 @@ class ExamList(Resource):
     """
     @api.doc('list_of_registered_exams')
     @api.marshal_list_with(_exam, envelope='data')
-    @token_required
+    # @token_required
     def get(self):
         """List all registered exams"""
         return get_all_exams()
