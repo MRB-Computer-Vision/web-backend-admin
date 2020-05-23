@@ -12,7 +12,7 @@ def add_exam(data):
         exam = exam_repository.save(data)
         response_object = {
             'success': True,
-            'message': 'Exam added with successfully.'
+            'message': 'Exam added successfully.'
         }
         return response_object, 201
     except Exception as e:

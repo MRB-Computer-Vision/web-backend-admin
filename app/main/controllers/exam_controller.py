@@ -36,7 +36,7 @@ class ExamList(Resource):
 class Exam(Resource):
     """ Exam Controller with get User by Id
     """
-    @api.doc('get a user')
+    @api.doc('get an Exame')
     @api.marshal_with(_exam)
     def get(self, _id):  # pylint: disable=redefined-builtin
         """get a user given its identifier"""
