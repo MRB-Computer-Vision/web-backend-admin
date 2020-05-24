@@ -8,6 +8,7 @@ from app.main import create_app, db
 from app.main.models import user
 from app.main.models import blacklist
 from app.main.models import exam
+from flask_cors import CORS
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -23,6 +24,7 @@ except Exception as ex:  # pylint: disable=broad-except
 app = create_app(os.getenv('APP_ENV') or 'dev')
 app.register_blueprint(blueprint)
 app.app_context().push()
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 manager = Manager(app)
 
