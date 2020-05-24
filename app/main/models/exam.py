@@ -28,7 +28,7 @@ class Exam(db.Model):
     status = db.Column(db.Enum(StatusEnum), nullable=False, default="pending")
     result = db.Column(db.Float(), nullable=False, default=0)
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
+    # updated_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
 
     def __init__(self):
         pass
@@ -38,6 +38,8 @@ class Exam(db.Model):
             if isinstance(x, datetime):
                 return x.isoformat()
             if isinstance(x, UUID):
+                return str(x)
+            if isinstance(x, float):
                 return str(x)
         return json.dumps(self.to_dict(), default=extended_encoder)
     # def __repr__(self):

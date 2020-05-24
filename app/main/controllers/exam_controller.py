@@ -3,7 +3,7 @@ from flask import request
 from flask_restx import Resource
 
 from ..util.dto import ExamDto
-from ..services.exam_service import add_exam, get_all_exams, get_a_exam
+from ..services.exam_service import add_exam, get_all_exams, get_an_exam
 from app.main.util.decorator import token_required
 
 api = ExamDto.api
@@ -40,7 +40,7 @@ class Exam(Resource):
     @api.marshal_with(_exam)
     def get(self, _id):  # pylint: disable=redefined-builtin
         """get a user given its identifier"""
-        exam = get_a_exam(_id)
+        exam = get_an_exam(_id)
         if not exam:
             api.abort(404)
         else:

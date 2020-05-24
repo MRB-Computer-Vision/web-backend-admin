@@ -28,7 +28,7 @@ def get_all_exams():
     return Exam.query.all()
 
 
-def get_a_exam(_id):  # pylint: disable=redefined-builtin
+def get_an_exam(_id):  # pylint: disable=redefined-builtin
     """ Get User by ID
     """
     return Exam.query.filter_by(id=_id).first()
