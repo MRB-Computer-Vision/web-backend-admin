@@ -6,4 +6,4 @@ def send_email(recipient, body):
         recipients=[recipient],
         body=body
     )
-  return 'Mail sent'
+  return {"message":"email sent"}, 200
