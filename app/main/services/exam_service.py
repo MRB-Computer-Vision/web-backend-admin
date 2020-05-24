@@ -32,3 +32,23 @@ def get_an_exam(_id):  # pylint: disable=redefined-builtin
     """ Get User by ID
     """
     return Exam.query.filter_by(id=_id).first()
+
+def update_an_exam(_id, data):
+    """"""
+    try:
+        exam_repository = ExamRepository()
+        exam_repository.update(data)
+        response_object = {
+            'success': True,
+            'message': 'Exam Updated successfully.'
+        }
+        return response_object, 204
+    except Exception as e:
+        response_object = {
+            'success': False,
+            'message': e
+        }
+        return response_object, 400
+
+def delete_an_exam(_id):
+    pass

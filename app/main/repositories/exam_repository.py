@@ -18,6 +18,13 @@ class ExamRepository:
     except Exception as e:
         return e
 
+  def update(self, _id, data):
+    try:
+      db.session.filter_by(id=_id).first().update(data)
+      db.session.commit()
+    except Exception as e:
+      return e
+
   def initialize_exam_files(self, exam_files_params):
       exam_files = []
       for exam_file_param in exam_files_params:

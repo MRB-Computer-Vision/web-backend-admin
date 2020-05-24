@@ -3,7 +3,7 @@ from flask import request
 from flask_restx import Resource
 
 from ..util.dto import ExamDto
-from ..services.exam_service import add_exam, get_all_exams, get_an_exam
+from ..services.exam_service import add_exam, get_all_exams, get_an_exam, update_an_exam
 from app.main.util.decorator import token_required
 
 api = ExamDto.api
@@ -29,7 +29,6 @@ class ExamList(Resource):
         """Creates a new Exam"""
         return add_exam(data=request.json)
 
-
 @api.route('/<id>')
 @api.param('id', 'The Exam identifier')
 @api.response(404, 'User not found.')
@@ -45,3 +44,17 @@ class Exam(Resource):
             api.abort(404)
         else:
             return exam
+
+    @api.response(201, 'Exam Updated Successfully.')
+    @api.doc('Update an Exame')
+    def put(self, _id):
+        """Update an Exame, specially on Result
+        
+        Get an json with the fields to update
+        Note, use this route to change the exam result.
+        """
+        return update_an_exam(_id, data=request.json)
+    
+    
+
+
