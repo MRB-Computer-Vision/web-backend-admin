@@ -40,9 +40,10 @@ class ExamDto:
     exam = api.model('exams', {
         'id': fields.String(required=False, description='exam id'),
         'status': fields.String(required=False, description='status'),
+        'result': fields.Float(required=False, description='pct of covid19'),
         'type': fields.String(required=True, description='type'),
         'created_at': fields.String(required=False, description='created_at'),
-        'updated_at': fields.Boolean(required=False, description='updated_at'),
+        'updated_at': fields.String(required=False, description='updated_at'),
         'exam_files': fields.List(fields.Nested(exam_file), required=True)
     })
     # child = api.inherit('Child', exam, {
