@@ -20,8 +20,11 @@ class ExamRepository:
 
   def update(self, _id, data):
     try:
-      db.session.filter_by(id=_id).first().update(data)
+      #FIXME: Need to study how to update multiple fields
+      exam = Exam.query.filter_by(id=_id).first()
+      exam.result = data['result']
       db.session.commit()
+      return self.exam
     except Exception as e:
       return e
 

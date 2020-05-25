@@ -27,7 +27,7 @@ class AuthDto:
     })
 
 
-class ExamDto:
+class ExamsDto:
     """ ExamDTO Class
     """
     api = Namespace('exams', description='exams related operations')
@@ -50,7 +50,7 @@ class ExamDto:
     #     'extra': fields.String
     # })
 
-class ExamOneDto:
+class ExamDto:
     """ ExamDTO Class
     """
     api = Namespace('examone', description='exam one related operations')

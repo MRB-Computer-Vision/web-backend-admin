@@ -37,12 +37,12 @@ def update_an_exam(_id, data):
     """"""
     try:
         exam_repository = ExamRepository()
-        exam_repository.update(data)
+        exam_repository.update(_id, data)
         response_object = {
             'success': True,
             'message': 'Exam Updated successfully.'
         }
-        return response_object, 204
+        return response_object, 202
     except Exception as e:
         response_object = {
             'success': False,

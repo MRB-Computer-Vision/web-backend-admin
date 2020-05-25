@@ -7,8 +7,8 @@ from flask import Blueprint
 
 from .main.controllers.user_controller import api as user_ns
 from .main.controllers.auth_controller import api as auth_ns
-from .main.controllers.exam_controller import api as exam_ns
-from .main.controllers.exam_controller import apione as exam_one_ns
+from .main.controllers.exam_controller import api_exams as exams_ns
+from .main.controllers.exam_controller import api_exam as exam_ns
 
 blueprint = Blueprint('api', __name__)
 
@@ -32,6 +32,6 @@ api = Api(
 )
 
 api.add_namespace(user_ns, path='/users')
+api.add_namespace(exams_ns, path='/exams')
 api.add_namespace(exam_ns, path='/exams')
-api.add_namespace(exam_one_ns, path='/exams/one')
 api.add_namespace(auth_ns)
