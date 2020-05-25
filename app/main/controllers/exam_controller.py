@@ -2,7 +2,7 @@
 from flask import request
 from flask_restx import Resource
 
-from ..util.dto import ExamDto
+from ..util.dto import ExamDto, ExamOneDto
 from ..services.exam_service import add_exam, get_all_exams, get_an_exam, update_an_exam
 from app.main.util.decorator import token_required
 
@@ -29,14 +29,17 @@ class ExamList(Resource):
         """Creates a new Exam"""
         return add_exam(data=request.json)
 
-@api.route('/<id>')
-@api.param('id', 'The Exam identifier')
-@api.response(404, 'User not found.')
+apione = ExamOneDto.api
+_exam_one = ExamOneDto.exam
+
+@apione.route('/<_id>')
+@apione.param('id', 'The Exam identifier')
+@apione.response(404, 'Exam not found.')
 class Exam(Resource):
     """ Exam Controller with get User by Id
     """
-    @api.doc('get an Exame')
-    @api.marshal_with(_exam)
+    @apione.doc('get an Exame')
+    @apione.marshal_with(_exam_one)
     def get(self, _id):  # pylint: disable=redefined-builtin
         """get a user given its identifier"""
         exam = get_an_exam(_id)
@@ -45,15 +48,17 @@ class Exam(Resource):
         else:
             return exam
 
-    @api.response(201, 'Exam Updated Successfully.')
-    @api.doc('Update an Exame')
+    @apione.response(204, 'Exam Updated Successfully.')
+    @apione.doc('Update an Exame')
+    @apione.expect(_exam_one, validate=True)
     def put(self, _id):
         """Update an Exame, specially on Result
         
         Get an json with the fields to update
         Note, use this route to change the exam result.
         """
-        return update_an_exam(_id, data=request.json)
+        # return update_an_exam(_id, data=request.json)
+        return {'message': 'on development'}
     
     
 
