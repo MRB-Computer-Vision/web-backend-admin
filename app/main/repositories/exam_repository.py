@@ -18,6 +18,16 @@ class ExamRepository:
     except Exception as e:
         return e
 
+  def update_exam_result(self, result):
+    try:
+        self.exam.result = result
+        self.exam.status = 'processed'
+        db.session.add(self.exam)
+        db.session.commit()
+        return self.exam
+    except Exception as e:
+        return e
+
   def initialize_exam_files(self, exam_files_params):
       exam_files = []
       for exam_file_param in exam_files_params:
