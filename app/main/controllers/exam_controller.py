@@ -2,12 +2,12 @@
 from flask import request
 from flask_restx import Resource
 
-from ..util.dto import UserDto
+from ..util.dto import ExamDto
 from ..services.exam_service import add_exam, get_all_exams, get_a_exam
 from app.main.util.decorator import token_required
 
-api = UserDto.api
-_exam = UserDto.user
+api = ExamDto.api
+_exam = ExamDto.exam
 
 
 @api.route('/')
@@ -23,12 +23,11 @@ class ExamList(Resource):
         return get_all_exams()
 
     @api.response(201, 'Exam successfully created.')
-    @api.doc('create a new user')
+    @api.doc('create a new exams')
     @api.expect(_exam, validate=True)
     def post(self):
         """Creates a new Exam"""
-        data = request.json
-        return add_exam(data=data)
+        return add_exam(data=request.json)
 
 
 @api.route('/<id>')

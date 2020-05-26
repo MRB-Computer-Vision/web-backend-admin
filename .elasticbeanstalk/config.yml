@@ -2,7 +2,7 @@ branch-defaults:
   default:
     environment: mrb-env
     group_suffix: null
-  feature/first-setup-docker-and-first-impressions:
+  feature/recepcao_exames_mvp:
     environment: mrb-env
 global:
   application_name: mrb-backend
