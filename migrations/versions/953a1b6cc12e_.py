@@ -1,8 +1,8 @@
-"""Init All Database
+"""empty message
 
-Revision ID: 5f3dfb2d6190
+Revision ID: 953a1b6cc12e
 Revises: 
-Create Date: 2020-05-22 22:33:24.414695
+Create Date: 2020-05-26 03:53:19.047654
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
-revision = '5f3dfb2d6190'
+revision = '953a1b6cc12e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -31,6 +31,8 @@ def upgrade():
     op.create_table('exams',
     sa.Column('id', postgresql.UUID(as_uuid=True), nullable=False),
     sa.Column('type', sa.String(length=255), nullable=False),
+    sa.Column('percentage', sa.Float(), nullable=True),
+    sa.Column('result', sa.String(length=255), nullable=True),
     sa.Column('status', sa.Enum('pending', 'processing', 'processed', 'error', name='statusenum'), nullable=False),
     sa.Column('created_at', sa.DateTime(timezone=True), nullable=True),
     sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
