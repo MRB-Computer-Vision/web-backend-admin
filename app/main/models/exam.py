@@ -27,6 +27,7 @@ class Exam(db.Model):
     percentage = db.Column(db.Float)
     result = db.Column(db.String(255))
     status = db.Column(db.Enum(StatusEnum), nullable=False, default="pending")
+    result = db.Column(db.Float(), nullable=False, default=0)
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
     updated_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
 
