@@ -30,7 +30,7 @@ class AuthDto:
 class ExamDto:
     """ ExamDTO Class
     """
-    api = Namespace('exams', description='exams related operations')
+    api = Namespace('examone', description='exam one related operations')
 
     exam_file = api.model('exam_files', {
         'id': fields.Integer(required=False, description='exam file id'),
@@ -40,11 +40,9 @@ class ExamDto:
     exam = api.model('exams', {
         'id': fields.String(required=False, description='exam id'),
         'status': fields.String(required=False, description='status'),
-        'type': fields.String(required=True, description='type'),
+        'result': fields.String(required=False, description='pct of covid19'),
+        'type': fields.String(required=False, description='type'),
         'created_at': fields.String(required=False, description='created_at'),
-        'updated_at': fields.Boolean(required=False, description='updated_at'),
-        'exam_files': fields.List(fields.Nested(exam_file), required=True)
+        'updated_at': fields.String(required=False, description='updated_at'),
+        'exam_files': fields.List(fields.Nested(exam_file), required=False)
     })
-    # child = api.inherit('Child', exam, {
-    #     'extra': fields.String
-    # })

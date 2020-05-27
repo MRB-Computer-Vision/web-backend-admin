@@ -6,6 +6,8 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from .. import db
 import enum
+import json
+
 
 class StatusEnum(enum.Enum):
     pending = 'pending'
@@ -25,7 +27,7 @@ class Exam(db.Model):
     type = db.Column(db.String(255), nullable=False)
     exam_files = relationship("ExamFile", back_populates="exam")
     percentage = db.Column(db.Float)
-    result = db.Column(db.String(255))
+    result = db.Column(db.String(255), nullable=True)
     status = db.Column(db.Enum(StatusEnum), nullable=False, default="pending")
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
     updated_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
@@ -53,6 +55,7 @@ class Exam(db.Model):
             'exam_files': [exam_file.to_json() for exam_file in self.exam_files]
         }
 
+
 class ExamFile(db.Model):
     """
     Exame Model for storing JWT tokens
@@ -65,7 +68,8 @@ class ExamFile(db.Model):
     exam_id = db.Column(
         UUID(as_uuid=True), db.ForeignKey("exams.id"))
     #order = db.Column(db.Integer)
-    exam = relationship("Exam", back_populates="exam_files", single_parent=True)
+    exam = relationship(
+        "Exam", back_populates="exam_files", single_parent=True)
     file_path = db.Column(db.String(500), nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
     updated_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)

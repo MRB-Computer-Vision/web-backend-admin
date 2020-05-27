@@ -28,6 +28,16 @@ class ExamRepository:
     except Exception as e:
         return e
 
+  def update(self, _id, data):
+    try:
+      #FIXME: Need to study how to update multiple fields
+      exam = Exam.query.filter_by(id=_id).first()
+      exam.result = data['result']
+      db.session.commit()
+      return self.exam
+    except Exception as e:
+      return e
+
   def initialize_exam_files(self, exam_files_params):
       exam_files = []
       for exam_file_param in exam_files_params:
