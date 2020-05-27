@@ -7,6 +7,7 @@ from sqlalchemy.orm import relationship
 from .. import db
 import enum
 
+
 class StatusEnum(enum.Enum):
     pending = 'pending'
     processing = 'processing'
@@ -54,6 +55,7 @@ class Exam(db.Model):
             'exam_files': [exam_file.to_json() for exam_file in self.exam_files]
         }
 
+
 class ExamFile(db.Model):
     """
     Exame Model for storing JWT tokens
@@ -66,7 +68,8 @@ class ExamFile(db.Model):
     exam_id = db.Column(
         UUID(as_uuid=True), db.ForeignKey("exams.id"))
     #order = db.Column(db.Integer)
-    exam = relationship("Exam", back_populates="exam_files", single_parent=True)
+    exam = relationship(
+        "Exam", back_populates="exam_files", single_parent=True)
     file_path = db.Column(db.String(500), nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
     updated_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
