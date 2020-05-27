@@ -1,3 +1,10 @@
+.vscode
+.idea
+.history
+docker/postgres/db
+data
+docker/redis/data
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -127,3 +134,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Ignore files from tmp
+app/main/tmp/
