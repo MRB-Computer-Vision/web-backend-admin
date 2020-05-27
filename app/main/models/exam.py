@@ -6,6 +6,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from .. import db
 import enum
+import json
 
 
 class StatusEnum(enum.Enum):
@@ -26,7 +27,7 @@ class Exam(db.Model):
     type = db.Column(db.String(255), nullable=False)
     exam_files = relationship("ExamFile", back_populates="exam")
     percentage = db.Column(db.Float)
-    result = db.Column(db.String(255))
+    result = db.Column(db.String(255), nullable=True)
     status = db.Column(db.Enum(StatusEnum), nullable=False, default="pending")
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
     updated_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)

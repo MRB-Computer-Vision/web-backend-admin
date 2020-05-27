@@ -2,12 +2,12 @@
 from flask import request
 from flask_restx import Resource
 
-from ..util.dto import ExamsDto, ExamDto
+from ..util.dto import ExamDto
 from ..services.exam_service import add_exam, get_all_exams, get_an_exam, update_an_exam
 from app.main.util.decorator import token_required
 
-api_exams = ExamsDto.api
-_exams = ExamsDto.exam
+api_exams = ExamDto.api
+_exams = ExamDto.exam
 
 
 @api_exams.route('/')
@@ -29,8 +29,10 @@ class ExamList(Resource):
         """Creates a new Exam"""
         return add_exam(data=request.json)
 
+
 api_exam = ExamDto.api
 _exam = ExamDto.exam
+
 
 @api_exam.route('/<_id>')
 @api_exam.param('id', 'The Exam identifier')
@@ -47,18 +49,15 @@ class Exam(Resource):
             api.abort(404)
         else:
             return exam
+
     @api_exam.response(202, 'Exam updated sucessfully.')
     @api_exam.doc('Update an Exame')
     @api_exam.expect(_exam, validate=True)
     def put(self, _id):
         """Update an Exame, specially on Result
-        
+
         Get an json with the fields to update
         Note, use this route to change the exam result.
         """
 
         return update_an_exam(_id, data=request.json)
-    
-    
-
-
