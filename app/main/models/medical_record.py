@@ -21,8 +21,8 @@ class MedicalRecord(db.Model):
     number = db.Column(db.String(255), nullable=False)
     exams = relationship("Exam", back_populates="medical_record")
 
-    def __init__(self):
-        pass
+    def __init__(self, number):
+        self.number = number
 
     def to_json(self):
         return {
