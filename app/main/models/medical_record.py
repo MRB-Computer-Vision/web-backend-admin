@@ -19,7 +19,7 @@ class MedicalRecord(db.Model):
     user_id = db.Column(
         UUID(as_uuid=True), db.ForeignKey("users.id"))
     number = db.Column(db.String(255), nullable=False)
-    exams = relationship("Exam", back_populates="exam")
+    exams = relationship("Exam", back_populates="medical_record")
 
     def __init__(self):
         pass

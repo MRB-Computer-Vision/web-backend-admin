@@ -32,7 +32,6 @@ class Exam(db.Model):
     medical_record = relationship("MedicalRecord", back_populates="exams", single_parent=True)
     medical_record_id = db.Column(
         UUID(as_uuid=True), db.ForeignKey("medical_records.id"))
-
     def __init__(self):
         pass
 
@@ -58,8 +57,7 @@ class ExamFile(db.Model):
     exam_id = db.Column(
         UUID(as_uuid=True), db.ForeignKey("exams.id"))
     #order = db.Column(db.Integer)
-    exam = relationship(
-        "Exam", back_populates="exam_files", single_parent=True)
+    exam = relationship("Exam", back_populates="exam_files", single_parent=True)
     file_path = db.Column(db.String(500), nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
     updated_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)

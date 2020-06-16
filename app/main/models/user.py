@@ -24,7 +24,7 @@ class User(db.Model):
     password = db.Column(db.String(100))
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
     updated_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
-    medical_records = relationship("MedicalRecord", back_populates="users")
+    medical_records = relationship("MedicalRecord", back_populates="user")
 
     @property
     def password_without_hash(self):
