@@ -6,8 +6,6 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from .. import db
 import enum
-import json
-
 
 class StatusEnum(enum.Enum):
     pending = 'pending'
@@ -31,20 +29,12 @@ class Exam(db.Model):
     status = db.Column(db.Enum(StatusEnum), nullable=False, default="pending")
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
     updated_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
+    medical_record = relationship("MedicalRecord", back_populates="exams", single_parent=True)
+    medical_record_id = db.Column(
+        UUID(as_uuid=True), db.ForeignKey("medical_records.id"))
 
     def __init__(self):
         pass
-
-    def to_json(self, rel=None):
-        def extended_encoder(x):
-            if isinstance(x, datetime):
-                return x.isoformat()
-            if isinstance(x, UUID):
-                return str(x)
-        return json.dumps(self.to_dict(), default=extended_encoder)
-
-    # def __repr__(self):
-    #     return '<id: token: {}'.format(self.token)
 
     def to_json(self):
         return {
@@ -84,6 +74,3 @@ class ExamFile(db.Model):
             'id': str(self.id),
             'file_path': self.file_path
         }
-
-    # def __repr__(self):
-    #     return '<id: token: {}'.format(self.token)
