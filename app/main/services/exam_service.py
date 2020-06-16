@@ -18,7 +18,7 @@ def add_exam(data):
         exam_repository.update_exam_result(result)
         response_object = {
             'success': True,
-            'message': 'Exam added with successfully.',
+            'message': 'Exam successfully added',
             'data': exam.medical_record.to_json()
         }
         return response_object, 201
@@ -27,7 +27,7 @@ def add_exam(data):
             'success': False,
             'message': str(e)
         }
-        return response_object, 200
+        return response_object, 500
 
 
 def get_all_exams():
