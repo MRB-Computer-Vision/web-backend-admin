@@ -51,6 +51,7 @@ class ExamRepository:
     medical_record = MedicalRecord.query.filter_by(number=str(data['number'])).first()
     if not medical_record:
         medical_record = MedicalRecord(data['number'])
+    # medical_record.user_id = current_user_id
     return medical_record
 
   def is_medical_record_number_present(self, data):
