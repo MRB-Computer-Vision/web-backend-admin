@@ -8,10 +8,10 @@ import boto3
 from urllib.parse import unquote
 
 
-def add_exam(data):
+def add_exam(data, current_user):
     # pylint: disable=no-member
     try:
-        exam_repository = ExamRepository()
+        exam_repository = ExamRepository(current_user)
         exam = exam_repository.save(data)
         # run prediction
         result = run_covid_predict(exam)

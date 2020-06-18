@@ -3,8 +3,9 @@ from app.main.models.exam import Exam, ExamFile
 from app.main.models.medical_record import MedicalRecord
 class ExamRepository:
 
-  def __init__(self):
+  def __init__(self, current_user):
     self.exam = Exam()
+    self.current_user = current_user
 
   def save(self, data):
     try:
@@ -51,7 +52,7 @@ class ExamRepository:
     medical_record = MedicalRecord.query.filter_by(number=str(data['number'])).first()
     if not medical_record:
         medical_record = MedicalRecord(data['number'])
-    # medical_record.user_id = current_user_id
+    medical_record.user_id = self.current_user['user_id']
     return medical_record
 
   def is_medical_record_number_present(self, data):

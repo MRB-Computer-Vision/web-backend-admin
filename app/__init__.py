@@ -30,6 +30,7 @@ api = Api(
     authorizations=authorizations
 )
 
+api.add_namespace(auth_ns, path='/auth')
 api.add_namespace(user_ns, path='/users')
 api.add_namespace(exams_ns, path='/exams')
 api.add_namespace(exam_ns, path='/exams')
