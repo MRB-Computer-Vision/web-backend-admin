@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from uuid import uuid4
 import jwt
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
 from app.main.models.blacklist import BlacklistToken
 from .. import db, flask_bcrypt
 from ..config import key
@@ -23,6 +24,7 @@ class User(db.Model):
     password = db.Column(db.String(100))
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
     updated_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
+    medical_records = relationship("MedicalRecord", back_populates="user")
 
     @property
     def password_without_hash(self):

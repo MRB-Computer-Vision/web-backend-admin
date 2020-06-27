@@ -23,7 +23,7 @@ class AuthDto:
     api = Namespace('auth', description='authentication related operations')
     user_auth = api.model('auth_details', {
         'email': fields.String(required=True, description='The email address'),
-        'password': fields.String(required=True, description='The user password '),
+        'password': fields.String(required=True, description='The user password ')
     })
 
 
@@ -45,4 +45,32 @@ class ExamDto:
         'created_at': fields.String(required=False, description='created_at'),
         'updated_at': fields.String(required=False, description='updated_at'),
         'exam_files': fields.List(fields.Nested(exam_file), required=False)
+    })
+
+class MedicalRecordDto:
+    """ ExamDTO Class
+    """
+    api = Namespace('medical_record', description='exam one related operations')
+
+    exam_file = api.model('exam_files', {
+        'id': fields.Integer(required=False, description='exam file id'),
+        'file_path': fields.String(required=True, description='type')
+    })
+
+    exam = api.model('exams', {
+        'id': fields.String(required=False, description='exam id'),
+        'status': fields.String(required=False, description='status'),
+        'result': fields.String(required=False, description='pct of covid19'),
+        'type': fields.String(required=False, description='type'),
+        'created_at': fields.String(required=False, description='created_at'),
+        'updated_at': fields.String(required=False, description='updated_at'),
+        'exam_files': fields.List(fields.Nested(exam_file), required=False)
+    })
+
+    medical_record = api.model('medical_records', {
+        'id': fields.String(required=False, description='medical_record id'),
+        'number': fields.String(required=False, description='status'),
+        'exams': fields.List(fields.Nested(exam), required=False),
+        'created_at': fields.String(required=False, description='created_at'),
+        'updated_at': fields.String(required=False, description='updated_at')
     })

@@ -8,27 +8,26 @@ import boto3
 from urllib.parse import unquote
 
 
-def add_exam(data):
+def add_exam(data, current_user):
     # pylint: disable=no-member
-
     try:
-        exam_repository = ExamRepository()
+        exam_repository = ExamRepository(current_user)
         exam = exam_repository.save(data)
         # run prediction
         result = run_covid_predict(exam)
         exam_repository.update_exam_result(result)
         response_object = {
             'success': True,
-            'message': 'Exam added with successfully.',
-            'data': exam.to_json()
+            'message': 'Exam successfully added',
+            'data': exam.medical_record.to_json()
         }
         return response_object, 201
     except Exception as e:
         response_object = {
             'success': False,
-            'message': e
+            'message': str(e)
         }
-        return response_object, 200
+        return response_object, 500
 
 
 def get_all_exams():
