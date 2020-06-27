@@ -2,7 +2,7 @@ branch-defaults:
   default:
     environment: mrb-env
     group_suffix: null
-  feature/recepcao_exames_mvp:
+  release-1.0:
     environment: mrb-env
 global:
   application_name: mrb-backend
