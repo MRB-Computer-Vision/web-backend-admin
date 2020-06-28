@@ -1,1 +1,1 @@
-web: python manage.py runserver --port=8000
+web: python manage.py runserver --port=$PORT
