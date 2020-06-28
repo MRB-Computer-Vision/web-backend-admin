@@ -1,2 +1,2 @@
 release: python manage.py db upgrade
-worker: python manage.py runserver --port=$PORT
+web: python manage.py runserver --port=$PORT --host=0.0.0.0
