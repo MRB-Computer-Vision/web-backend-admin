@@ -137,3 +137,7 @@ dmypy.json
 
 # Ignore files from tmp
 app/main/tmp/
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
