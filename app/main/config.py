@@ -20,7 +20,7 @@ class DevelopmentConfig(Config):
         user=os.getenv('DB_USERNAME'),
         pw=os.getenv('DB_PASSWORD'),
         host=os.getenv('DB_HOST'),
-        port=eval(os.getenv('DB_PORT')),
+        port=os.getenv('DB_PORT'),
         db=os.getenv('DB_DATABASE'))
     SQLALCHEMY_DATABASE_URI = DB_URL
 
@@ -43,7 +43,7 @@ class TestingConfig(Config):
         user=os.getenv('DB_USERNAME'),
         pw=os.getenv('DB_PASSWORD'),
         host=os.getenv('DB_HOST'),
-        port=eval(os.getenv('DB_PORT')),
+        port=os.getenv('DB_PORT'),
         db=os.getenv('DB_DATABASE_TEST'))
     SQLALCHEMY_DATABASE_URI = DB_URL
     PRESERVE_CONTEXT_ON_EXCEPTION = False
@@ -58,7 +58,7 @@ class ProductionConfig(Config):
         user=os.getenv('DB_USERNAME'),
         pw=os.getenv('DB_PASSWORD'),
         host=os.getenv('DB_HOST'),
-        port=eval(os.getenv('DB_PORT')),
+        port=os.getenv('DB_PORT'),
         db=os.getenv('DB_DATABASE'))
     SQLALCHEMY_DATABASE_URI = DB_URL
 
@@ -67,8 +67,6 @@ config_by_name = dict(
     dev=DevelopmentConfig,
     test=TestingConfig,
     prod=ProductionConfig
-
-
 )
 
 key = Config.SECRET_KEY
