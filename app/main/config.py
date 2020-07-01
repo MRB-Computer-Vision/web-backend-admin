@@ -3,6 +3,15 @@ import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+try:
+    from flask.cli import load_dotenv
+    from pathlib import Path
+
+    env_path = Path('.') / 'docker/.env'
+    load_dotenv(env_path)
+except Exception as ex:  # pylint: disable=broad-except
+    pass
+
 
 class Config:
     """ All configs independent of the environment
