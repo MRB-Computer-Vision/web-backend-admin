@@ -2,7 +2,7 @@
 from app.main import db
 from app.main.models.exam import Exam, ExamFile
 from app.main.repositories.exam_repository import ExamRepository
-# from covid_vision.ml.models.covid_cxr import CovidCXR
+from covid_vision.ml.models.covid_cxr import CovidCXR
 import os
 import boto3
 from urllib.parse import unquote
@@ -66,17 +66,17 @@ def delete_an_exam(_id):
 
 def run_covid_predict(exam):
     file_path = os.path.abspath(os.getcwd()) + '/app/main/tmp/'
-    # if not os.path.exists(file_path):
-    #     os.makedirs(file_path)
-    # clf = CovidCXR()
-    # s3 = boto3.client('s3', aws_access_key_id=os.getenv(
-    #     'S3_ACCESS_KEY'), aws_secret_access_key=os.getenv('S3_ACCESS_SECRET'))
-    # # TODO improve the prediction result loop
-    # for exam_file in exam.exam_files:
-    #     file_name = exam_file.file_path
-    #     s3.download_file(os.getenv('S3_BUCKET_NAME'),
-    #                      file_name, file_path + 'test.png')
-    #     img = clf.read_image(file_path + 'test.png')
-    #     result = clf.predict(img)
-    #     prediction = clf.CLASSES[result.argmax()]
+    if not os.path.exists(file_path):
+        os.makedirs(file_path)
+    clf = CovidCXR()
+    s3 = boto3.client('s3', aws_access_key_id=os.getenv(
+        'S3_ACCESS_KEY'), aws_secret_access_key=os.getenv('S3_ACCESS_SECRET'))
+    # TODO improve the prediction result loop
+    for exam_file in exam.exam_files:
+        file_name = exam_file.file_path
+        s3.download_file(os.getenv('S3_BUCKET_NAME'),
+                         file_name, file_path + 'test.png')
+        img = clf.read_image(file_path + 'test.png')
+        result = clf.predict(img)
+        prediction = clf.CLASSES[result.argmax()]
     return prediction
