@@ -5,7 +5,7 @@ attrs==19.3.0
 autopep8==1.5.2
 bcrypt==3.1.7
 boto3==1.13.16
-certifi==2020.4.5.1
+certifi==2022.12.7
 cffi==1.14.0
 click==7.1.2
 coverage==5.1
